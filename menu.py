@@ -1,4 +1,8 @@
-class MainMenu:
+class BaseMenu:
+    def display(self):
+        pass
+
+class MainMenu(BaseMenu):
     amt = 0
     def display(self):
         print("LEGO Management System")
