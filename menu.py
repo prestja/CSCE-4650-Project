@@ -10,11 +10,15 @@ class MainMenu(BaseMenu):
         while d < 1:
             i = -1
             print("LEGO Management System")
-            print("You are not logged in!")
+            if globals.login is None:
+                print("You are not logged in!")
+            else:
+                print("You are logged in as...")    
             print("---------------------\n")
             print("[1] Log in as customer (online mode)")
             print("[2] Log in as employee (store mode)")
-            print("[3] Exit system")
+            print("[3] Log out")
+            print("[4] Exit system")
             i = int(input("Please make a selection: "))
             if i == 1:
                 subMenu = LoginMenu(0)
@@ -23,7 +27,10 @@ class MainMenu(BaseMenu):
                 subMenu = LoginMenu(1)
                 subMenu.display()
             if i == 3:
+                globals.login = None
+            if i == 4:
                 quit()
+
 
 class LoginMenu(BaseMenu):
     asEmployee = 0
@@ -44,6 +51,7 @@ class LoginMenu(BaseMenu):
             result = globals.cursor.fetchone()
             if result is not None:
                 print("Successfully logged in!")
+                globals.login = globals.Login()
             else:
                 print("Invalid username or password")
             print("")
