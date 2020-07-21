@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS customers (
     name VARCHAR(255),
     address VARCHAR(255),
     storeprefs ENUM('physical', 'online'),
-    username VARCHAR(255) unique primary key,
+    username VARCHAR(255) UNIQUE PRIMARY KEY,
     password VARCHAR(255)
 );
 
@@ -62,16 +62,16 @@ insert into employees (name, storeprefs, password)
 values('jacob', 'store', '44931'), ('kamal', 'online', '65535'), ('sagar', 'store', '12345');
 
 CREATE TABLE IF NOT EXISTS orders (
-    orderNum INT auto_increment key,    
-    username varchar(255),
+    orderNum INT AUTO_INCREMENT KEY,
+    username VARCHAR(255),
     type ENUM('card', 'cash'),
     cardType ENUM('amex', 'mc', 'vista', 'other'),
     pin INT,
     billingAddress VARCHAR(255),
     amount FLOAT,
     status ENUM('open', 'closed'),
-    foreign key (username)
-		references customers(username)
+    FOREIGN KEY (username)
+        REFERENCES customers (username)
 );
 
 CREATE TABLE IF NOT EXISTS orderitemset (
