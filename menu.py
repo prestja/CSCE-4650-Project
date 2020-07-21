@@ -78,9 +78,7 @@ class PartMenu (BaseMenu):
             print("[2] List sets")
             i = int(input("Please make a selection: "))
             if i == 0:
-                quit()
-                print("Returning")
-                d = 2
+                break
             if i == 1:
                 print("partslist")
                 query = "select * from parts"
