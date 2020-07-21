@@ -34,7 +34,7 @@ class MainMenu(BaseMenu):
             if i == 3:
                 globals.login = None
             if i == 4:
-                subMenu = ItemMenu()
+                subMenu = PartMenu()
                 subMenu.display()
             if i == 0:
                 quit()
@@ -69,9 +69,23 @@ class LoginMenu(BaseMenu):
                 print("Invalid username or password")
             print("")
 
-class ItemMenu (BaseMenu):
+class PartMenu (BaseMenu):
     def display(self):
-        print("Items...")
-        d = -1
-        while d < 0:
-            i = input("Please make a selection")
+        d = 0
+        while d < 1:
+            print("[0] Go back")
+            print("[1] List parts")
+            print("[2] List sets")
+            i = int(input("Please make a selection: "))
+            if i == 0:
+                quit()
+                print("Returning")
+                d = 2
+            if i == 1:
+                print("partslist")
+                query = "select * from parts"
+                
+            if i == 2:
+                print("Setslists")
+                query = "select * from sets"
+                
