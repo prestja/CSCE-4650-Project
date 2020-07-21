@@ -7,9 +7,9 @@ drop table if exists orderitemset;
 drop table if exists setparts;
 drop table if exists sets;
 drop table if exists parts;
+drop table if exists orders;
 drop table if exists customers;
 drop table if exists employees;
-drop table if exists orders;
 
 CREATE TABLE IF NOT EXISTS parts (
     partID INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,18 +25,24 @@ CREATE TABLE IF NOT EXISTS sets (
     name VARCHAR(255)
 );
 
+/* Create some sample sets */
 insert into sets(name)
 values ('TIE-Fighter'), ('X-Wing');
 
 CREATE TABLE IF NOT EXISTS setparts (
     partID INT,
     setID INT,
+    quantity int,
     FOREIGN KEY (partID)
         REFERENCES parts (partID),
     FOREIGN KEY (setID)
         REFERENCES sets (setID)
 );
 
+/* Create some sample set-part lists */
+INSERT INTO setparts (partID, setID, quantity)
+	VALUES (1, 1, 14), (2, 2, 4);
+    
 CREATE TABLE IF NOT EXISTS customers (
     name VARCHAR(255),
     address VARCHAR(255),

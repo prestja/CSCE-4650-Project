@@ -93,6 +93,7 @@ class PartMenu (BaseMenu):
                 print("Listing all sets in the system...")
                 print("---------------------\n") 
                 globals.cursor.execute(query)
-                for (setID, name) in globals.cursor:
-                    print("{} {}".format(setID, name))
+                results = globals.cursor.fetchall()
+                for (setID, name) in results:
+                    print("ID: {} Name: {}".format(setID, name))
                 print("")
