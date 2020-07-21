@@ -1,7 +1,8 @@
 create database if not exists lego;
 use lego;
 
-/* Drop tables as we are making massive changes to the schema */
+/* Uncomment the section below to regenerate the tables if major changes to the schema are made */
+/*
 drop table if exists orderitemset;
 drop table if exists setparts;
 drop table if exists sets;
@@ -9,6 +10,7 @@ drop table if exists parts;
 drop table if exists customers;
 drop table if exists employees;
 drop table if exists orders;
+*/
 
 CREATE TABLE IF NOT EXISTS parts (
     partID INT NOT NULL UNIQUE,

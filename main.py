@@ -10,7 +10,8 @@ def main():
 db = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="CSce4650!"
+  password="CSce4650!",
+  database="lego"
 )
 
 print(db)
