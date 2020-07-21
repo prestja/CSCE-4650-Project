@@ -85,7 +85,7 @@ class PartMenu (BaseMenu):
                 print("---------------------\n")
                 globals.cursor.execute(query)
                 for (partID, name) in globals.cursor:
-                    print("{} {}".format(partID, name))
+                    print("Part Number: {} Name: {}".format(partID, name))
                 print("")
 
             if i == 2:
@@ -95,5 +95,10 @@ class PartMenu (BaseMenu):
                 globals.cursor.execute(query)
                 results = globals.cursor.fetchall()
                 for (setID, name) in results:
-                    print("ID: {} Name: {}".format(setID, name))
+                    print("Set Number: {} Name: {}".format(setID, name))
+                    query2 = "select * from setparts where setID = %(setID)s"
+                    globals.cursor.execute(query2, {'setID': setID})
+                    results2 = globals.cursor.fetchall()
+                    for (part) in results2:
+                        print("\t Part Number: {} Quantity: {}".format(part[0], part[2]))
                 print("")

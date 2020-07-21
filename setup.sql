@@ -13,7 +13,8 @@ drop table if exists employees;
 
 CREATE TABLE IF NOT EXISTS parts (
     partID INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(255),
+    price float
 );
 
 insert into parts (name)
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS setparts (
 
 /* Create some sample set-part lists */
 INSERT INTO setparts (partID, setID, quantity)
-	VALUES (1, 1, 14), (2, 2, 4);
+	VALUES (1, 1, 14), (2, 1, 6), (2, 2, 4);
     
 CREATE TABLE IF NOT EXISTS customers (
     name VARCHAR(255),
