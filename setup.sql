@@ -11,15 +11,14 @@ drop table if exists customers;
 drop table if exists employees;
 drop table if exists orders;
 
-
 CREATE TABLE IF NOT EXISTS parts (
-    partID INT NOT NULL UNIQUE,
+    partID INT AUTO_INCREMENT NOT NULL UNIQUE,
     name VARCHAR(255),
     PRIMARY KEY (partID)
 );
 
 CREATE TABLE IF NOT EXISTS sets (
-    setID INT NOT NULL UNIQUE,
+    setID INT AUTO_INCREMENT NOT NULL UNIQUE,
     name VARCHAR(255),
     PRIMARY KEY (setID)
 );
