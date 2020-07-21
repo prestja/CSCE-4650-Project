@@ -1,7 +1,8 @@
 create database if not exists lego;
 use lego;
 
-/* Drop tables as we are making massive changes to the scheme */
+/* Drop tables as we are making massive changes to the schema */
+drop table if exists orderitemset;
 drop table if exists setparts;
 drop table if exists sets;
 drop table if exists parts;
@@ -20,7 +21,7 @@ CREATE TABLE IF NOT EXISTS sets (
     PRIMARY KEY (setID)
 );
 
-CREATE TABLE IF NOT EXISTS setparts (    
+CREATE TABLE IF NOT EXISTS setparts (
     partID INT,
     setID INT,
     FOREIGN KEY (partID)
@@ -29,19 +30,29 @@ CREATE TABLE IF NOT EXISTS setparts (
         REFERENCES sets (setID)
 );
 
-create table if not exists customers (
-	name varchar(255),
-    address varchar (255),
-    storeprefs enum('physical', 'online'),
-    username varchar(255),
-    password varchar(255)
+CREATE TABLE IF NOT EXISTS customers (
+    name VARCHAR(255),
+    address VARCHAR(255),
+    storeprefs ENUM('physical', 'online'),
+    username VARCHAR(255),
+    password VARCHAR(255)
 );
 
-create table if not exists orders (
-	orderNum int,
-    type enum ('card', 'cash'),
-    cardType enum('amex', 'mc', 'vista', 'other'),
-    pin int,
-    billingAddress varchar(255),
-    amount float
+CREATE TABLE IF NOT EXISTS orders (
+    orderNum INT,
+    type ENUM('card', 'cash'),
+    cardType ENUM('amex', 'mc', 'vista', 'other'),
+    pin INT,
+    billingAddress VARCHAR(255),
+    amount FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS orderitemset (
+    orderNum INT NOT NULL,
+    partID INT,
+    setID INT,
+    FOREIGN KEY (partID)
+        REFERENCES parts (partID),
+    FOREIGN KEY (setID)
+        REFERENCES sets (setID)
 );
