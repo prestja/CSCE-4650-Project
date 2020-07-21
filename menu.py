@@ -45,9 +45,9 @@ class LoginMenu(BaseMenu):
         else:
             usr = input("Enter your username: ")
             pswd = input("Enter your password: ")
-            query = "select * from customers where username = %(username)s"
+            query = "select * from customers where username = %(username)s and password = %(password)s"
             
-            globals.cursor.execute(query, {'username': usr,})
+            globals.cursor.execute(query, {'username': usr, 'password': pswd})
             result = globals.cursor.fetchone()
             if result is not None:
                 print("Successfully logged in!")
