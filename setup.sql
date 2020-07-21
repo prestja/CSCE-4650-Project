@@ -7,7 +7,8 @@ drop table if exists setparts;
 drop table if exists sets;
 drop table if exists parts;
 drop table if exists customers;
-drop table if exists payment;
+drop table if exists employees;
+drop table if exists orders;
 
 CREATE TABLE IF NOT EXISTS parts (
     partID INT NOT NULL UNIQUE,
@@ -38,8 +39,14 @@ CREATE TABLE IF NOT EXISTS customers (
     password VARCHAR(255)
 );
 
+create table if not exists employees (
+	employeeID int unique not null,
+    name varchar(255),
+    storeprefs ENUM('physical', 'online')
+);
+
 CREATE TABLE IF NOT EXISTS orders (
-    orderNum INT,
+    orderNum INT UNIQUE,
     type ENUM('card', 'cash'),
     cardType ENUM('amex', 'mc', 'vista', 'other'),
     pin INT,
