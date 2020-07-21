@@ -41,11 +41,15 @@ CREATE TABLE IF NOT EXISTS customers (
     password VARCHAR(255)
 );
 
-create table if not exists employees (
-	employeeID int AUTO_INCREMENT primary key,
-    name varchar(255),
-    storeprefs ENUM('physical', 'online')
+CREATE TABLE IF NOT EXISTS employees (
+    employeeID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    storeprefs ENUM('store', 'online')
 );
+
+/* Insert sample employees */
+insert into employees (name, storeprefs)
+values('jacob', 'store'), ('kamal', 'online'), ('sagar', 'store');
 
 CREATE TABLE IF NOT EXISTS orders (
     orderNum INT UNIQUE,
@@ -65,6 +69,3 @@ CREATE TABLE IF NOT EXISTS orderitemset (
     FOREIGN KEY (setID)
         REFERENCES sets (setID)
 );
-
-insert into employees ()
-values();
