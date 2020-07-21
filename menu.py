@@ -2,6 +2,7 @@ class BaseMenu:
     def display(self):
         pass
 class MainMenu(BaseMenu):
+    subMenu = None
     def display(self):
         i = -1
         print("LEGO Management System")
@@ -14,8 +15,22 @@ class MainMenu(BaseMenu):
         while i < 1 or i > 3:
             i = int(input("Please make a selection: "))
         if i == 1:
-            print("Selection 1")
+            subMenu = LoginMenu(0)
+            subMenu.display()
         if i == 2:
-            print("Selection 2")
+            subMenu = LoginMenu(1)
+            subMenu.display()
         if i == 3:
-            print("Selection 3")
+            quit()
+
+class LoginMenu(BaseMenu):
+    asEmployee = 0
+
+    def __init__(self, asEmp):
+        self.asEmployee = asEmp
+
+    def display(self):
+        if self.asEmployee == 1:
+            print("Login as employee")
+        else:
+            print ("Login as customer")
