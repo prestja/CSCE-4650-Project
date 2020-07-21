@@ -40,13 +40,22 @@ class LoginMenu(BaseMenu):
 
     def display(self):
         if self.asEmployee == 1:
-            id = input("Enter your employee ID: ")
+            id = int(input("Enter your employee ID: "))
             pswd = input("Enter your password: ")
+            query = "select * from employees where employeeID = %(employeeID)s and password = %(password)s"
+            globals.cursor.execute(query, {'employeeID': id, 'password': pswd})
+            result = globals.cursor.fetchone()
+            if result is not None:
+                print("Successfully logged in!")
+                globals.login = globals.Login()
+            else:
+                print("Invalid username or password")
+            print("")
+
         else:
             usr = input("Enter your username: ")
             pswd = input("Enter your password: ")
             query = "select * from customers where username = %(username)s and password = %(password)s"
-            
             globals.cursor.execute(query, {'username': usr, 'password': pswd})
             result = globals.cursor.fetchone()
             if result is not None:

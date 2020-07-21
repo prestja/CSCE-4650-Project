@@ -48,13 +48,14 @@ insert into customers(name, address, storeprefs, username, password)
     
 CREATE TABLE IF NOT EXISTS employees (
     employeeID INT AUTO_INCREMENT PRIMARY KEY,
+    password varchar(255),
     name VARCHAR(255),
     storeprefs ENUM('store', 'online')
 );
 
 /* Insert sample employees */
-insert into employees (name, storeprefs)
-values('jacob', 'store'), ('kamal', 'online'), ('sagar', 'store');
+insert into employees (name, storeprefs, password)
+values('jacob', 'store', '44931'), ('kamal', 'online', '65535'), ('sagar', 'store', '12345');
 
 CREATE TABLE IF NOT EXISTS orders (
     orderNum INT UNIQUE,
