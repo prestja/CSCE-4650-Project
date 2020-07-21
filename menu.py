@@ -41,5 +41,9 @@ class LoginMenu(BaseMenu):
             usr = input("Enter your username: ")
             pswd = input("Enter your password: ")
             query = "select * from customers where username = %(username)s"
+            count = 0
+            
             for result in globals.cursor.execute(query, {'username': usr}, multi=True):
-                print("result")
+                count = count + 1
+            if count > 0:
+                print("Successfully logged in!") 
