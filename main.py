@@ -14,5 +14,7 @@ db = mysql.connector.connect(
   database="lego"
 )
 
+cursor = db.cursor()
+
 print(db)
 main()
