@@ -80,10 +80,11 @@ class PartMenu (BaseMenu):
             if i == 0:
                 break
             if i == 1:
-                print("partslist")
                 query = "select * from parts"
-                
+                print("Listing all parts in the system...")
+                print("---------------------\n") 
             if i == 2:
-                print("Setslists")
                 query = "select * from sets"
+                print("Listing all sets in the system...")
+                print("---------------------\n") 
                 
