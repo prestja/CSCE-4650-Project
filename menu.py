@@ -1,3 +1,5 @@
+import globals
+
 class BaseMenu:
     def display(self):
         pass
@@ -38,4 +40,6 @@ class LoginMenu(BaseMenu):
             print ("Login as customer")
             usr = input("Enter your username: ")
             pswd = input("Enter your password: ")
-            
+            query = "select * from customers where username = %(username)s"
+            for result in globals.cursor.execute(query, {'username': usr}, multi=True):
+                print("result")

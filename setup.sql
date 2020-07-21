@@ -41,6 +41,11 @@ CREATE TABLE IF NOT EXISTS customers (
     password VARCHAR(255)
 );
 
+insert into customers(name, address, storeprefs, username, password)
+	values('John Doe', '123 Apple Lane', 'physical', 'jd123', '123');
+
+/* select * from customers where username='jd123'; */
+    
 CREATE TABLE IF NOT EXISTS employees (
     employeeID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),

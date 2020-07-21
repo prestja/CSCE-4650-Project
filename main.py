@@ -1,12 +1,11 @@
-from menu import *
+import menu
+import globals
 import mysql.connector
 
 def main():
-    a = MainMenu()
+    a = menu.MainMenu()
     a.display()
 	
-
-
 db = mysql.connector.connect(
   host="localhost",
   user="root",
@@ -14,7 +13,7 @@ db = mysql.connector.connect(
   database="lego"
 )
 
-cursor = db.cursor()
+globals.cursor = db.cursor()
 
 print(db)
 main()
