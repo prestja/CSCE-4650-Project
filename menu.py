@@ -82,9 +82,17 @@ class PartMenu (BaseMenu):
             if i == 1:
                 query = "select * from parts"
                 print("Listing all parts in the system...")
-                print("---------------------\n") 
+                print("---------------------\n")
+                globals.cursor.execute(query)
+                for (partID, name) in globals.cursor:
+                    print("{} {}".format(partID, name))
+                print("")
+
             if i == 2:
                 query = "select * from sets"
                 print("Listing all sets in the system...")
                 print("---------------------\n") 
-                
+                globals.cursor.execute(query)
+                for (setID, name) in globals.cursor:
+                    print("{} {}".format(setID, name))
+                print("")

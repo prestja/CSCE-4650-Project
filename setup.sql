@@ -12,16 +12,21 @@ drop table if exists employees;
 drop table if exists orders;
 
 CREATE TABLE IF NOT EXISTS parts (
-    partID INT AUTO_INCREMENT NOT NULL UNIQUE,
-    name VARCHAR(255),
-    PRIMARY KEY (partID)
+    partID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
 );
 
+insert into parts (name)
+values('1x1 brick'), ('2x2 brick');
+/* select * from parts; */
+
 CREATE TABLE IF NOT EXISTS sets (
-    setID INT AUTO_INCREMENT NOT NULL UNIQUE,
-    name VARCHAR(255),
-    PRIMARY KEY (setID)
+    setID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
 );
+
+insert into sets(name)
+values ('TIE-Fighter'), ('X-Wing');
 
 CREATE TABLE IF NOT EXISTS setparts (
     partID INT,
@@ -47,7 +52,7 @@ insert into customers(name, address, storeprefs, username, password)
     
 CREATE TABLE IF NOT EXISTS employees (
     employeeID INT AUTO_INCREMENT PRIMARY KEY,
-    password varchar(255),
+    password VARCHAR(255),
     name VARCHAR(255),
     storeprefs ENUM('store', 'online')
 );
