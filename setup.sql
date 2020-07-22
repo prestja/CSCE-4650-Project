@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 insert into orders (username, type, amount, status)
-values ('jd123', 'cash', 7.20, 'open'), ('jc456', 'cash', '14.0', 'closed');
+values ('jd123', 'cash', 7.20, 'closed'), ('jc456', 'cash', '14.0', 'closed');
 
 /* select * from orders where username = 'jd123'; */
 

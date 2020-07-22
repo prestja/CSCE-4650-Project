@@ -104,8 +104,9 @@ class PartMenu (BaseMenu):
         d = 0
         while d < 1:
             print("[0] Go back")
-            print("[1] List parts")
-            print("[2] List sets")
+            print("[1] View parts")
+            print("[2] View sets")
+            print("[3] Add item to order")
             i = int(input("Please make a selection: "))
             if i == 0:
                 break
@@ -140,3 +141,17 @@ class PartMenu (BaseMenu):
                             p = globals.cursor.fetchone()
                             if p[1] is not None:
                                 print("\t{}, {}".format(p[1], part[2]))
+            if i == 3:
+                partID = input("Enter the part ID. Leave blank if purchasing a set: ")
+                setID = input("Enter the set ID. Leave blank if purchasing a part: ")
+                findRecentOrder = ("select * from orders where username = %(username)s and status = 'open'")
+                globals.cursor.execute(findRecentOrder, {'username': globals.login.username})
+                recentOrder = globals.cursor.fetchone()
+                if recentOrder is None:
+                    print("Need to create a new order!")
+                else:
+                    print("Order already exists, adding to it!")
+                #if partID is None:
+                 #   pass
+                #else:
+                 #   pass
