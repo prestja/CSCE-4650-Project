@@ -75,9 +75,12 @@ class OrderMenu (BaseMenu):
     def display(self):
         d = -0
         while d < 1:
+            print("[0] Go back")
             print("[1] View orders")
             print("[2] Alter order")
             i = int(input("Please make a selection: "))
+            if i == 0:
+                break
             if i == 1:
                 if globals.login.employee == True:
                     print("Listing all orders in the system:")
