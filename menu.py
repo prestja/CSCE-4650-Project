@@ -94,12 +94,12 @@ class PartMenu (BaseMenu):
                 print("Listing all sets in the system...")
                 print("---------------------\n") 
                 globals.cursor.execute(query)
-                results = globals.cursor.fetchall()
-                for r in results:
-                    print(r)
+                sets = globals.cursor.fetchall()
+                for set in sets:
+                    print("SetID: {} Name: {}".format(set[0], set[1]))
                     query2 = "select * from setparts where setID = %(setID)s"
-                    if r[0] is not None:
-                        globals.cursor.execute(query2, {'setID': r[0]})
+                    if set[0] is not None:
+                        globals.cursor.execute(query2, {'setID': set[0]})
                         results2 = globals.cursor.fetchall()
                         for (part) in results2:
                             query3 = "select * from parts where partID = %(partID)s"
