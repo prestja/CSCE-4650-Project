@@ -84,9 +84,10 @@ class PartMenu (BaseMenu):
                 print("Listing all parts in the system...")
                 print("---------------------\n")
                 globals.cursor.execute(query)
-                for (partID, name) in globals.cursor:
-                    print("Part Number: {} Name: {}".format(partID, name))
-                print("")
+                row = globals.cursor.fetchone()
+                while row is not None:
+                    print(row)
+                    row = globals.cursor.fetchone()
 
             if i == 2:
                 query = "select * from sets"
@@ -94,11 +95,11 @@ class PartMenu (BaseMenu):
                 print("---------------------\n") 
                 globals.cursor.execute(query)
                 results = globals.cursor.fetchall()
-                for (setID, name) in results:
-                    print("Set Number: {} Name: {}".format(setID, name))
+                for r in results:
+                    print(r)
                     query2 = "select * from setparts where setID = %(setID)s"
-                    globals.cursor.execute(query2, {'setID': setID})
-                    results2 = globals.cursor.fetchall()
-                    for (part) in results2:
-                        print("\t Part Number: {} Quantity: {}".format(part[0], part[2]))
-                print("")
+                    if r[0] is not None:
+                        globals.cursor.execute(query2, {'setID': r[0]})
+                        results2 = globals.cursor.fetchall()
+                        for (part) in results2:
+                            print("\t{}".format(part))
