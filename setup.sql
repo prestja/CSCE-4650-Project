@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS parts (
     quantity int
 );
 
-insert into parts (name)
-values('1x1 brick'), ('2x2 brick');
+insert into parts (name, price, quantity)
+values('1x1 brick', 0.15, 256), ('2x2 brick', 0.17, 256);
 /* select * from parts; */
 
 CREATE TABLE IF NOT EXISTS sets (
@@ -45,6 +45,14 @@ CREATE TABLE IF NOT EXISTS setparts (
 /* Create some sample set-part lists */
 INSERT INTO setparts (partID, setID, quantity)
 	VALUES (1, 1, 14), (2, 1, 6), (2, 2, 4);
+
+SELECT sum(price)
+FROM parts 
+INNER JOIN setparts
+ON parts.partID= setparts.partID
+where setID = 1;
+
+/*select sum(price) as totalPrice from setparts where setID = 2; */
     
 CREATE TABLE IF NOT EXISTS customers (
     name VARCHAR(255),
