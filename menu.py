@@ -20,9 +20,8 @@ class MainMenu(BaseMenu):
                 print("[3] Log out")
             if globals.login is not None:
                 print("[4] View items")
-                print("[5] Manage inventory")
-                print("[6] Manage orders")
-                print("[7] Generate reports")
+                print("[5] View orders")
+                print("[6] View reports")
             print("[0] Exit system")
             i = int(input("Please make a selection: "))
             if i == 1:
@@ -35,6 +34,9 @@ class MainMenu(BaseMenu):
                 globals.login = None
             if i == 4:
                 subMenu = PartMenu()
+                subMenu.display()
+            if i == 5:
+                subMenu = OrderMenu()
                 subMenu.display()
             if i == 0:
                 quit()
@@ -68,6 +70,12 @@ class LoginMenu(BaseMenu):
             else:
                 print("Invalid username or password")
             print("")
+
+class OrderMenu (BaseMenu):
+    def display(self):
+        print("Order menu")
+        d = input("Please make a selection: ")
+
 
 class PartMenu (BaseMenu):
     def display(self):

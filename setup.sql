@@ -91,6 +91,9 @@ CREATE TABLE IF NOT EXISTS orders (
         REFERENCES customers (username)
 );
 
+insert into orders (username, type, amount, status)
+values ('jd123', 'cash', 7.20, 'open');
+
 CREATE TABLE IF NOT EXISTS orderitemset (
     orderNum INT AUTO_INCREMENT PRIMARY KEY,
     partID INT,
