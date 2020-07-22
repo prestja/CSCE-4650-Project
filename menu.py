@@ -96,12 +96,15 @@ class PartMenu (BaseMenu):
                 globals.cursor.execute(query)
                 sets = globals.cursor.fetchall()
                 for set in sets:
-                    print("SetID: {} Name: {}".format(set[0], set[1]))
+                    priceQuery = "SELECT sum(`price` * setparts.quantity) FROM parts INNER JOIN setparts ON parts.partID = setparts.partID where setID = %(setID)s;"
+                    globals.cursor.execute(priceQuery, {'setID': set[0]})
+                    price = globals.cursor.fetchone()[0]
+                    print("SetID: {} Name: {} Price: {:.2f}".format(set[0], set[1], price))
                     query2 = "select * from setparts where setID = %(setID)s"
                     if set[0] is not None:
                         globals.cursor.execute(query2, {'setID': set[0]})
-                        results2 = globals.cursor.fetchall()
-                        for (part) in results2:
+                        parts = globals.cursor.fetchall()
+                        for (part) in parts:
                             query3 = "select * from parts where partID = %(partID)s"
                             globals.cursor.execute(query3, {'partID': part[0]})
                             p = globals.cursor.fetchone()

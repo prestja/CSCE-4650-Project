@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS setparts (
 INSERT INTO setparts (partID, setID, quantity)
 	VALUES (1, 1, 14), (2, 1, 6), (2, 2, 4);
 
-SELECT sum(price)
+SELECT sum(`price` * setparts.quantity)
 FROM parts 
 INNER JOIN setparts
 ON parts.partID= setparts.partID
