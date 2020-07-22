@@ -14,7 +14,8 @@ drop table if exists employees;
 CREATE TABLE IF NOT EXISTS parts (
     partID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
-    price float
+    price float,
+    quantity int
 );
 
 insert into parts (name)
@@ -23,7 +24,8 @@ values('1x1 brick'), ('2x2 brick');
 
 CREATE TABLE IF NOT EXISTS sets (
     setID INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(255),
+    quantity int
 );
 
 /* Create some sample sets */

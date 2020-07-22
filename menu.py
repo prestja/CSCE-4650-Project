@@ -52,7 +52,7 @@ class LoginMenu(BaseMenu):
             result = globals.cursor.fetchone()
             if result is not None:
                 print("Successfully logged in!")
-                globals.login = globals.Login(id, pswd)
+                globals.login = globals.Login(id, pswd, True)
             else:
                 print("Invalid username or password")
             print("")
@@ -64,7 +64,7 @@ class LoginMenu(BaseMenu):
             result = globals.cursor.fetchone()
             if result is not None:
                 print("Successfully logged in!")
-                globals.login = globals.Login(usr, pswd)
+                globals.login = globals.Login(usr, pswd, False)
             else:
                 print("Invalid username or password")
             print("")
