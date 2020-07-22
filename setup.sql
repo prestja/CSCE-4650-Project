@@ -46,11 +46,13 @@ CREATE TABLE IF NOT EXISTS setparts (
 INSERT INTO setparts (partID, setID, quantity)
 	VALUES (1, 1, 14), (2, 1, 6), (2, 2, 4);
 
+/*
 SELECT sum(`price` * setparts.quantity)
 FROM parts 
 INNER JOIN setparts
 ON parts.partID= setparts.partID
 where setID = 1;
+*/
 
 /*select sum(price) as totalPrice from setparts where setID = 2; */
     
@@ -63,7 +65,7 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 
 insert into customers(name, address, storeprefs, username, password)
-	values('John Doe', '123 Apple Lane', 'physical', 'jd123', '123');
+	values('John Doe', '123 Apple Lane', 'physical', 'jd123', '123'), ('Jane Doe Carpenter', '456 Cherry Avenue', 'physical', 'jc456', '456');
 
 /* select * from customers where username='jd123'; */
     
@@ -92,7 +94,9 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 insert into orders (username, type, amount, status)
-values ('jd123', 'cash', 7.20, 'open');
+values ('jd123', 'cash', 7.20, 'open'), ('jc456', 'cash', '14.0', 'closed');
+
+/* select * from orders where username = 'jd123'; */
 
 CREATE TABLE IF NOT EXISTS orderitemset (
     orderNum INT AUTO_INCREMENT PRIMARY KEY,
