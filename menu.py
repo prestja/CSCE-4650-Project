@@ -102,4 +102,8 @@ class PartMenu (BaseMenu):
                         globals.cursor.execute(query2, {'setID': r[0]})
                         results2 = globals.cursor.fetchall()
                         for (part) in results2:
-                            print("\t{}".format(part))
+                            query3 = "select * from parts where partID = %(partID)s"
+                            globals.cursor.execute(query3, {'partID': part[0]})
+                            p = globals.cursor.fetchone()
+                            if p[1] is not None:
+                                print("\t{}, {}".format(p[1], part[2]))
