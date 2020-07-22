@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS orders (
         REFERENCES customers (username)
 );
 
-insert into orders (username, type, amount, status)
-values ('jd123', 'cash', 7.20, 'closed'), ('jc456', 'cash', '14.0', 'closed');
+insert into orders (username, type, status)
+values ('jd123', 'cash', 'open'), ('jc456', 'cash', 'closed');
 
 /* select * from orders where username = 'jd123'; */
 

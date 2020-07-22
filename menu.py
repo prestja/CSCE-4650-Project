@@ -147,11 +147,17 @@ class PartMenu (BaseMenu):
                 findRecentOrder = ("select * from orders where username = %(username)s and status = 'open'")
                 globals.cursor.execute(findRecentOrder, {'username': globals.login.username})
                 recentOrder = globals.cursor.fetchone()
+                # Add a new open order for this user if it does not already exist
                 if recentOrder is None:
-                    print("Need to create a new order!")
-                else:
-                    print("Order already exists, adding to it!")
-                #if partID is None:
-                 #   pass
-                #else:
-                 #   pass
+                    query = ("insert into orders (username, type, status) values (%(username)s, 'cash', 'open')")
+                    # Create a new open order
+                    globals.cursor.execute(query, {'username': globals.login.username})
+                    # Fetch that order and use it as recentorder
+                    globals.cursor.execute(findRecentOrder, {'username': globals.login.username})
+                    recentOrder = globals.cursor.fetchone()
+                orderNum = recentOrder[0]
+                insert = ("insert into orderitemset (orderNum, partID, setID) values (%(orderNum)s, %(partID)s, %(setID)s)")
+                if partID is None:
+                    globals.cursor.execute(insert, {'orderNum': orderNum, 'partID': None, 'setID': setID})
+                if setID is None:
+                    globals.cursor.execute(insert, {'orderNum': orderNum, 'partID': partID, 'setID': None})
