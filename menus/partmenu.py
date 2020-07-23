@@ -45,7 +45,15 @@ class PartMenu ():
                             if p[1] is not None:
                                 print("\t{}, {}".format(p[1], part[2]))
             if i == 3:
-                id = input("Enter the name of the part or set you are interested in: ")
+                name = input("Enter the name of the part or set you are interested in: ")
+                globals.cursor.execute("SELECT * FROM parts WHERE name LIKE %s", ("%" + name + "%",))
+                results = globals.cursor.fetchall()
+                for result in results:
+                    print(result)
+                globals.cursor.execute("SELECT * FROM sets WHERE name LIKE %s", ("%" + name + "%",))
+                results = globals.cursor.fetchall()
+                for result in results:
+                    print(result)
 
             if i == 4:
                 partID = input("Enter the part ID. Leave blank if purchasing a set: ")
