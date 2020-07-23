@@ -99,7 +99,7 @@ values ('jd123', 'cash', 'open'), ('jc456', 'cash', 'closed');
 /* select * from orders where username = 'jd123'; */
 
 CREATE TABLE IF NOT EXISTS orderitemset (
-    orderNum INT AUTO_INCREMENT PRIMARY KEY,
+    orderNum INT PRIMARY KEY,
     partID INT,
     setID INT,
     FOREIGN KEY (partID)
@@ -107,3 +107,5 @@ CREATE TABLE IF NOT EXISTS orderitemset (
     FOREIGN KEY (setID)
         REFERENCES sets (setID)
 );
+
+insert into orderitemset(orderNum, partID) values(1, 1)
