@@ -1,4 +1,5 @@
 import globals
+import mysql.connector
 
 class LoginMenu:
     asEmployee = 0

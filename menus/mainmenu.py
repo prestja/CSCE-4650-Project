@@ -1,4 +1,5 @@
 import globals
+import mysql.connector
 from .loginmenu import LoginMenu
 from .partmenu import PartMenu
 from .ordermenu import OrderMenu
