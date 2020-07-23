@@ -31,8 +31,18 @@ class OnlineMenu:
         else:
             orderNum = recentOrder[0]
             print("Order number {}".format(orderNum))
-            query = ("select * in orderitemset where orderNum = %(orderNum)s")
+            query = ("select * from orderitemset where orderNum = %(orderNum)s")
             globals.cursor.execute(query, {'orderNum': orderNum})
             items = globals.cursor.fetchall()
             for item in items:
-                print(item)
+                if item[2] is None:
+                    query = ("select * from parts where partID = %(partID)s")
+                    globals.cursor.execute(query, {'partID': item[1]})
+                    part = globals.cursor.fetchone()
+                    print("\t{}".format(part))
+                elif item[1] is None:
+                    query = ("select * from sets where setID = %(setID)s")
+                    globals.cursor.execute(query, {'setID': item[2]})
+                    set = globals.cursor.fetchone()
+                    print("\t{}".format(set))
+                #print(item)
