@@ -1,10 +1,12 @@
-import menu
+# from .menu import MainMenu
+from menus.mainmenu import MainMenu
 import globals
 import mysql.connector
 
 def main():
-    a = menu.MainMenu()
+    a = MainMenu()
     a.display()
+    pass
 	
 db = mysql.connector.connect(
   host="localhost",
@@ -14,6 +16,8 @@ db = mysql.connector.connect(
 )
 
 globals.cursor = db.cursor()
+globals.db = db
 
 print(db)
+db.commit()
 main()
