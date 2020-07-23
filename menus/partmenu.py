@@ -5,10 +5,11 @@ class PartMenu ():
     def display(self):
         d = 0
         while d < 1:
-            print("[0] Go back")
             print("[1] View parts")
             print("[2] View sets")
-            print("[3] Add item to order")
+            print("[3] Search for a part or set")
+            print("[4] Add item to order")
+            print("[0] Go back")
             i = int(input("Please make a selection: "))
             if i == 0:
                 break
@@ -44,6 +45,9 @@ class PartMenu ():
                             if p[1] is not None:
                                 print("\t{}, {}".format(p[1], part[2]))
             if i == 3:
+                id = input("Enter the name of the part or set you are interested in: ")
+
+            if i == 4:
                 partID = input("Enter the part ID. Leave blank if purchasing a set: ")
                 setID = input("Enter the set ID. Leave blank if purchasing a part: ")
                 findRecentOrder = ("select * from orders where username = %(username)s and status = 'open'")

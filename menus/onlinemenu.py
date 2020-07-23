@@ -1,5 +1,6 @@
 import mysql.connector
 import globals
+from .partmenu import PartMenu
 
 class OnlineMenu:
     def display(self):
@@ -14,7 +15,8 @@ class OnlineMenu:
                 globals.login = None
                 break
             if i == 1:
-                print("merch")
+                subMenu = PartMenu()
+                subMenu.display()
             if i == 2:
-                print("checkout")
+                print("IMPLEMENT ME (checkout)")
         
