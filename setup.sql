@@ -88,14 +88,16 @@ CREATE TABLE IF NOT EXISTS orders (
     cardNumber int,
     pin INT,
     billingAddress VARCHAR(255),
+    placed DATETIME,
+    delivered DATETIME,
     amount FLOAT,
-    status ENUM('open', 'awaiting', 'closed', 'refunded'),
+    status ENUM('open', 'transit', 'delivered', 'refunded'),
     FOREIGN KEY (username)
         REFERENCES customers (username)
 );
 
 insert into orders (username, type, status)
-values ('jd123', 'cash', 'open'), ('jc456', 'cash', 'closed');
+values ('jd123', 'cash', 'open'), ('jc456', 'cash', 'delivered');
 
 /* select * from orders where username = 'jd123'; */
 

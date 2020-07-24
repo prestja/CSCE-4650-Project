@@ -35,7 +35,7 @@ class OrderMenu:
                 if existingOrder is None:
                     print("Whoops! We couldn't find that order!")
                     continue
-                print("[1] Send order back to cart\n[2] Send order back to waiting for delivery\n[3] Close order\n[4] Refund order")
+                print("[1] Cancel order\n[2] Schedule delivery\n[3] Mark order as delivered\n[4] Refund order")
                 status = input("Please make a selection: ")
                 update = ("update orders set status = %(status)s where orderNum = %(orderNum)s")
                 try:
