@@ -99,7 +99,7 @@ values ('jd123', 'cash', 'open'), ('jc456', 'cash', 'closed');
 /* select * from orders where username = 'jd123'; */
 
 CREATE TABLE IF NOT EXISTS orderitemset (
-    orderNum INT PRIMARY KEY,
+    orderNum INT not null,
     partID INT,
     setID INT,
     FOREIGN KEY (partID)
