@@ -1,5 +1,6 @@
 import mysql.connector
 import globals
+from .employeemenu import EmployeeMenu
 
 class StoreMenu:
     def display(self):
@@ -15,7 +16,8 @@ class StoreMenu:
                 globals.login = None
                 break
             if i == 1:
-                print("employees")
+                subMenu = EmployeeMenu()
+                subMenu.display()
             if i == 2:
                 print("orders")
             if i == 3:

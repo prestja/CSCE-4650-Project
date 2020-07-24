@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS orders (
     pin INT,
     billingAddress VARCHAR(255),
     amount FLOAT,
-    status ENUM('open', 'closed'),
+    status ENUM('open', 'awaiting', 'closed'),
     FOREIGN KEY (username)
         REFERENCES customers (username)
 );
