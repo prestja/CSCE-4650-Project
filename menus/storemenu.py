@@ -1,6 +1,7 @@
 import mysql.connector
 import globals
 from .employeemenu import EmployeeMenu
+from .ordermenu import OrderMenu
 
 class StoreMenu:
     def display(self):
@@ -19,6 +20,7 @@ class StoreMenu:
                 subMenu = EmployeeMenu()
                 subMenu.display()
             if i == 2:
-                print("orders")
+                subMenu = OrderMenu()
+                subMenu.display()
             if i == 3:
                 print("invetnory")

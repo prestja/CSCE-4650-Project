@@ -5,9 +5,10 @@ class OrderMenu:
     def display(self):
         d = -0
         while d < 1:
-            print("[0] Go back")
             print("[1] View orders")
-            print("[2] Alter order")
+            if globals.login.employee == True:
+                print("[2] Alter order")
+            print("[0] Go back")
             i = int(input("Please make a selection: "))
             if i == 0:
                 break
@@ -27,4 +28,10 @@ class OrderMenu:
                     for order in orders:
                         print(order)
             if i == 2:
-                pass
+                orderNum = int(input("Enter the order number: "))
+                query = ("select * from orders where orderNum = %(orderNum)s")
+                globals.cursor.execute(query, {'orderNum': orderNum})
+                existingOrder = globals.cursor.fetchone()
+                if existingOrder is None:
+                    print("Whoops! We couldn't find that order!")
+                    continue
