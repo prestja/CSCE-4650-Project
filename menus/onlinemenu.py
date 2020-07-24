@@ -34,8 +34,9 @@ class OnlineMenu:
                 print("[3] Vista")
                 print("[4] Other")
                 cardType = input("Please select from the list of card providers: ")
-                
-
+                query = ("update orders set type = 'card', cardType = %(cardType)s, cardNumber = %(cardNumber)s, pin = %(pin)s, billingAddress = %(billingAddress)s, amount = 9.99 where orderNum = %(orderNum)s")
+                globals.cursor.execute(query, {'cardType': cardType, 'cardNumber': cardNumber, 'pin': pin, 'billingAddress': billingAddress, 'orderNum': recentOrder[0]})
+                globals.db.commit()
 
     def getRecentOrder(self):
         findRecentOrder = ("select * from orders where username = %(username)s and status = 'open'")
