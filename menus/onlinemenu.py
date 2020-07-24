@@ -22,10 +22,29 @@ class OnlineMenu:
                 self.printCart()
             if i == 3:
                 self.printCart()
-    def printCart(self):
+                recentOrder = self.getRecentOrder()
+                if recentOrder is None:
+                    return
+                print("Please enter your billing information")
+                billingAddress = input("Billing address: ")                
+                cardNumber = int(input("Card Number: "))
+                pin = int(input("Card PIN: "))
+                print("[1] Amex")
+                print("[2] MC")
+                print("[3] Vista")
+                print("[4] Other")
+                cardType = input("Please select from the list of card providers: ")
+                
+
+
+    def getRecentOrder(self):
         findRecentOrder = ("select * from orders where username = %(username)s and status = 'open'")
         globals.cursor.execute(findRecentOrder, {'username': globals.login.username})
         recentOrder = globals.cursor.fetchone()
+        return recentOrder
+
+    def printCart(self):
+        recentOrder = self.getRecentOrder()
         if recentOrder is None:
             print("Whoops! You don't appear to have an order.\nAdd some items to your cart to begin a new order.")
         else:

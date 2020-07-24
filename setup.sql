@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS orders (
     username VARCHAR(255),
     type ENUM('card', 'cash'),
     cardType ENUM('amex', 'mc', 'vista', 'other'),
+    cardNumber int,
     pin INT,
     billingAddress VARCHAR(255),
     amount FLOAT,
