@@ -26,7 +26,7 @@ class OrderMenu:
                     globals.cursor.execute(query, {'username': globals.login.username})
                     orders = globals.cursor.fetchall()
                     for order in orders:
-                        print(order)
+                        print("\t{}".format(order))
             if i == 2:
                 orderNum = int(input("Enter the order number: "))
                 query = ("select * from orders where orderNum = %(orderNum)s")
@@ -35,3 +35,12 @@ class OrderMenu:
                 if existingOrder is None:
                     print("Whoops! We couldn't find that order!")
                     continue
+                print("[1] Send order back to cart\n[2] Send order back to waiting for delivery\n[3] Close order\n[4] Refund order")
+                status = input("Please make a selection: ")
+                update = ("update orders set status = %(status)s where orderNum = %(orderNum)s")
+                try:
+                    globals.cursor.execute(update, {'status': status, 'orderNum': orderNum})
+                    globals.db.commit()
+                except mysql.connector.Error as err:
+                    print("Something went wrong: {}".format(err))
+                

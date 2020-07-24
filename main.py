@@ -18,6 +18,4 @@ db = mysql.connector.connect(
 globals.cursor = db.cursor()
 globals.db = db
 
-print(db)
-db.commit()
 main()
