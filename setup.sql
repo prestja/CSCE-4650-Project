@@ -20,7 +20,6 @@ CREATE TABLE IF NOT EXISTS parts (
 
 insert into parts (name, price, quantity)
 values('1x1 brick', 0.15, 256), ('2x2 brick', 0.17, 256);
-/* select * from parts; */
 
 CREATE TABLE IF NOT EXISTS sets (
     setID INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,8 +54,6 @@ CREATE TABLE IF NOT EXISTS customers (
 
 insert into customers(name, address, storeprefs, username, password)
 	values('John Doe', '123 Apple Lane', 'physical', 'jd123', '123'), ('Jane Doe Carpenter', '456 Cherry Avenue', 'physical', 'jc456', '456');
-
-/* select * from customers where username='jd123'; */
     
 CREATE TABLE IF NOT EXISTS employees (
     employeeID INT AUTO_INCREMENT PRIMARY KEY,
@@ -87,8 +84,6 @@ CREATE TABLE IF NOT EXISTS orders (
 
 insert into orders (username, type, status, placed)
 values ('jd123', 'card', 'transit', '2020-7-14 14:29:36'), ('jd123', 'card', 'refunded', '2020-7-22 12:00:00'), ('jc456', 'card', 'transit', '2020-7-25 2:13:00');
-
-/* select * from orders where username = 'jd123'; */
 
 CREATE TABLE IF NOT EXISTS orderitemset (
     orderNum INT not null,
