@@ -24,7 +24,7 @@ class OnlineMenu:
                 self.printCart()
             if i == 3:
                 self.printCart()
-                recentOrder = self.getRecentOrder()
+                recentOrder = globals.getRecentOrder()
                 if recentOrder is None:
                     return
                 print("Please enter your billing information")
@@ -41,56 +41,19 @@ class OnlineMenu:
                 delivered = placed + datetime.timedelta(days = 3) # Three days shipping by default
                 placed.strftime('%Y-%m-%d %H:%M:%S')
                 delivered.strftime('%Y-%m-%d %H:%M:%S')
-                amount = self.getPriceOfRecentOrder()
+                amount = globals.getPriceOfRecentOrder()
                 query = ("update orders set status = 'transit', type = 'card', cardType = %(cardType)s, cardNumber = %(cardNumber)s, pin = %(pin)s, billingAddress = %(billingAddress)s, amount = 9.99, placed = %(placed)s, delivered = %(delivered)s, amount = %(amount)s where orderNum = %(orderNum)s")
                 globals.cursor.execute(query, {'cardType': cardType, 'cardNumber': cardNumber, 'pin': pin, 'billingAddress': billingAddress, 'placed': placed, 'delivered': delivered, 'amount': amount, 'orderNum': recentOrder[0]})
                 globals.db.commit()
                 print("Thank you!\nYour order will now be processed")
 
-    def getPriceOfRecentOrder(self): # Returns the total of the total contents of an order, consisting of parts and/or sets
-        total = 0
-        recentOrder = self.getRecentOrder()
-        if recentOrder is not None:
-            orderNum = recentOrder [0]
-            query = ("select * from orderitemset where orderNum = %(orderNum)s")
-            globals.cursor.execute(query, {'orderNum': orderNum})
-            setparts = globals.cursor.fetchall()
-            for setpart in setparts:
-                if setpart[1] is not None: # if a part
-                    pquery = ("select * from parts where partID = %(partID)s")
-                    globals.cursor.execute(pquery, {'partID': setpart[0]})
-                    setpart = globals.cursor.fetchone()
-                    total += setpart[2]
-                elif setpart[2] is not None: # if a set
-                    squery = ("select * from sets where setID = %(setID)s")
-                    globals.cursor.execute(squery, {'setID': setpart[2]})
-                    set = globals.cursor.fetchone()
-                    quantity = setpart[2]
-                    spquery = ("select * from setparts where setID = %(setID)s")
-                    globals.cursor.execute(spquery, {'setID': setpart[2]})
-                    setparts = globals.cursor.fetchall()
-                    for setpart in setparts: # for each part in set
-                        pquery = ("select * from parts where partID = %(partID)s") # find the part
-                        globals.cursor.execute(pquery, {'partID': setpart[1]})
-                        part = globals.cursor.fetchone()
-                        total += part[2] * setpart[2] # and add its price
-                        print("set {} has {} of part {} worth {} apiece".format(setpart[1], quantity, part[0], part[2]))
-        return total
-
-
-    def getRecentOrder(self):
-        findRecentOrder = ("select * from orders where username = %(username)s and status = 'open'")
-        globals.cursor.execute(findRecentOrder, {'username': globals.login.username})
-        recentOrder = globals.cursor.fetchone()
-        return recentOrder
-
     def printCart(self):
-        recentOrder = self.getRecentOrder()
+        recentOrder = globals.getRecentOrder()
         if recentOrder is None:
             print("Whoops! You don't appear to have an order.\nAdd some items to your cart to begin a new order.")
         else:            
             orderNum = recentOrder[0]
-            print("Order number {} total price ${:.2f}".format(orderNum, self.getPriceOfRecentOrder()))
+            print("Order number {} total price ${:.2f}".format(orderNum, globals.getPriceOfRecentOrder()))
             query = ("select * from orderitemset where orderNum = %(orderNum)s")
             globals.cursor.execute(query, {'orderNum': orderNum})
             items = globals.cursor.fetchall()

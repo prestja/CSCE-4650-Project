@@ -14,8 +14,8 @@ drop table if exists employees;
 CREATE TABLE IF NOT EXISTS parts (
     partID INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
-    price float,
-    quantity int
+    price FLOAT,
+    quantity INT
 );
 
 insert into parts (name, price, quantity)
@@ -33,7 +33,7 @@ values ('TIE-Fighter'), ('X-Wing');
 CREATE TABLE IF NOT EXISTS setparts (
     partID INT,
     setID INT,
-    quantity int,
+    quantity INT,
     FOREIGN KEY (partID)
         REFERENCES parts (partID),
     FOREIGN KEY (setID)
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS orders (
     username VARCHAR(255),
     type ENUM('card', 'cash'),
     cardType ENUM('amex', 'mc', 'vista', 'other'),
-    cardNumber int,
+    cardNumber INT,
     pin INT,
     billingAddress VARCHAR(255),
     placed DATETIME,
@@ -86,7 +86,7 @@ insert into orders (username, type, status, placed)
 values ('jd123', 'card', 'transit', '2020-7-14 14:29:36'), ('jd123', 'card', 'refunded', '2020-7-22 12:00:00'), ('jc456', 'card', 'transit', '2020-7-25 2:13:00');
 
 CREATE TABLE IF NOT EXISTS orderitemset (
-    orderNum INT not null,
+    orderNum INT NOT NULL,
     partID INT,
     setID INT,
     FOREIGN KEY (partID)
