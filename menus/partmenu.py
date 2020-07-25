@@ -56,8 +56,8 @@ class PartMenu ():
                     print(result)
 
             if i == 4:
-                partID = input("Enter the part ID. Leave blank if purchasing a set: ")
-                setID = input("Enter the set ID. Leave blank if purchasing a part: ")
+                partID = input("Enter the part ID: ")
+                setID = input("Enter the set ID: ")
                 findRecentOrder = ("select * from orders where username = %(username)s and status = 'open'")
                 globals.cursor.execute(findRecentOrder, {'username': globals.login.username})
                 recentOrder = globals.cursor.fetchone()

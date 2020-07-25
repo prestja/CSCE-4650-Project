@@ -21,9 +21,9 @@ class OnlineMenu:
                 subMenu = PartMenu()
                 subMenu.display()
             if i == 2:
-                self.printCart()
+                globals.printCart()
             if i == 3:
-                self.printCart()
+                globals.printCart()
                 recentOrder = globals.getRecentOrder()
                 if recentOrder is None:
                     return
@@ -47,25 +47,3 @@ class OnlineMenu:
                 globals.db.commit()
                 print("Thank you!\nYour order will now be processed")
 
-    def printCart(self):
-        recentOrder = globals.getRecentOrder()
-        if recentOrder is None:
-            print("Whoops! You don't appear to have an order.\nAdd some items to your cart to begin a new order.")
-        else:            
-            orderNum = recentOrder[0]
-            print("Order number {} total price ${:.2f}".format(orderNum, globals.getPriceOfRecentOrder()))
-            query = ("select * from orderitemset where orderNum = %(orderNum)s")
-            globals.cursor.execute(query, {'orderNum': orderNum})
-            items = globals.cursor.fetchall()
-            for item in items:
-                if item[2] is None:
-                    query = ("select * from parts where partID = %(partID)s")
-                    globals.cursor.execute(query, {'partID': item[1]})
-                    part = globals.cursor.fetchone()
-                    print("\t{}".format(part))
-                elif item[1] is None:
-                    query = ("select * from sets where setID = %(setID)s")
-                    globals.cursor.execute(query, {'setID': item[2]})
-                    set = globals.cursor.fetchone()
-                    print("\t{}".format(set))
-                #print(item)
