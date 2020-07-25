@@ -73,13 +73,13 @@ class PartMenu ():
                     recentOrder = globals.cursor.fetchone()
                 
                 orderNum = recentOrder[0]
-                if partID == "":
+                if partID == "": # if a set
                     try:
-                        insert = ("insert into orderitemset (orderNum, setID) values (%(orderNum)s %(setID)s)")
+                        insert = ("insert into orderitemset (orderNum, setID) values (%(orderNum)s, %(setID)s)")
                         globals.cursor.execute(insert, {'orderNum': orderNum, 'setID': setID})
                     except mysql.connector.Error as err:
                         print("Something went wrong: {}".format(err))
-                elif setID == "":
+                elif setID == "": # if a part
                     try:
                         insert = ("insert into orderitemset (orderNum, partID) values (%(orderNum)s, %(partID)s)")
                         globals.cursor.execute(insert, {'orderNum': orderNum, 'partID': partID})

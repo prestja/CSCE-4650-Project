@@ -28,17 +28,12 @@ def getPriceOfRecentOrder(): # Returns the total of the total contents of an ord
         cursor.execute(query, {'orderNum': orderNum})
         setparts = cursor.fetchall()
         for setpart in setparts: # for each item in the order
-            print(setpart)
             if setpart[1] is not None: # if a part
                 pquery = ("select * from parts where partID = %(partID)s")
                 cursor.execute(pquery, {'partID': setpart[1]})
                 part = cursor.fetchone()
-                print(part)
                 total += part[2]
             elif setpart[2] is not None: # if a set
-                #squery = ("select * from sets where setID = %(setID)s")
-                #cursor.execute(squery, {'setID': setpart[1]})
-                #set = cursor.fetchone()
                 quantity = setpart[2]
                 spquery = ("select * from setparts where setID = %(setID)s")
                 cursor.execute(spquery, {'setID': setpart[1]})
@@ -72,4 +67,3 @@ def printCart():
                 cursor.execute(query, {'setID': item[2]})
                 set = cursor.fetchone()
                 print("\t{}".format(set))
-            #print(item)    
