@@ -41,9 +41,9 @@ class OnlineMenu:
                 delivered = placed + datetime.timedelta(days = 3) # Three days shipping by default
                 placed.strftime('%Y-%m-%d %H:%M:%S')
                 delivered.strftime('%Y-%m-%d %H:%M:%S')
-
-                query = ("update orders set status = 'transit', type = 'card', cardType = %(cardType)s, cardNumber = %(cardNumber)s, pin = %(pin)s, billingAddress = %(billingAddress)s, amount = 9.99, placed = %(placed)s, delivered = %(delivered)s where orderNum = %(orderNum)s")
-                globals.cursor.execute(query, {'cardType': cardType, 'cardNumber': cardNumber, 'pin': pin, 'billingAddress': billingAddress, 'placed': placed, 'delivered': delivered, 'orderNum': recentOrder[0]})
+                amount = self.getPriceOfRecentOrder()
+                query = ("update orders set status = 'transit', type = 'card', cardType = %(cardType)s, cardNumber = %(cardNumber)s, pin = %(pin)s, billingAddress = %(billingAddress)s, amount = 9.99, placed = %(placed)s, delivered = %(delivered)s, amount = %(amount)s where orderNum = %(orderNum)s")
+                globals.cursor.execute(query, {'cardType': cardType, 'cardNumber': cardNumber, 'pin': pin, 'billingAddress': billingAddress, 'placed': placed, 'delivered': delivered, 'amount': amount, 'orderNum': recentOrder[0]})
                 globals.db.commit()
                 print("Thank you!\nYour order will now be processed")
 
