@@ -2,6 +2,7 @@ import mysql.connector
 import globals
 from .employeemenu import EmployeeMenu
 from .ordermenu import OrderMenu
+from .reportmenu import ReportMenu
 
 class StoreMenu:
     def display(self):
@@ -11,6 +12,7 @@ class StoreMenu:
             print("[1] Manage employees")
             print("[2] Manage orders")
             print("[3] Manage inventory")
+            print("[4] Generate reports")
             print("[0] Log out")
             i = int(input("Please make a selection: "))
             if i == 0:
@@ -24,3 +26,6 @@ class StoreMenu:
                 subMenu.display()
             if i == 3:
                 print("invetnory")
+            if i == 4:
+                subMenu = ReportMenu()
+                subMenu.display()
