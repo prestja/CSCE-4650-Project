@@ -24,8 +24,7 @@ values('1x1 brick', 0.15, 256), ('2x2 brick', 0.17, 256);
 
 CREATE TABLE IF NOT EXISTS sets (
     setID INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    quantity int
+    name VARCHAR(255)
 );
 
 /* Create some sample sets */
@@ -45,16 +44,6 @@ CREATE TABLE IF NOT EXISTS setparts (
 /* Create some sample set-part lists */
 INSERT INTO setparts (partID, setID, quantity)
 	VALUES (1, 1, 14), (2, 1, 6), (2, 2, 4);
-
-/*
-SELECT sum(`price` * setparts.quantity)
-FROM parts 
-INNER JOIN setparts
-ON parts.partID= setparts.partID
-where setID = 1;
-*/
-
-/*select sum(price) as totalPrice from setparts where setID = 2; */
     
 CREATE TABLE IF NOT EXISTS customers (
     name VARCHAR(255),
@@ -111,4 +100,5 @@ CREATE TABLE IF NOT EXISTS orderitemset (
         REFERENCES sets (setID)
 );
 
-insert into orderitemset(orderNum, partID) values(1, 1)
+insert into orderitemset(orderNum, partID) values(1, 1); /* First part */
+insert into orderitemset(orderNum, setID) values(1, 2); /* First set */
