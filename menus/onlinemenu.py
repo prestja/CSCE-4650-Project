@@ -56,22 +56,22 @@ class OnlineMenu:
             globals.cursor.execute(query, {'orderNum': orderNum})
             setparts = globals.cursor.fetchall()
             for setpart in setparts:
-                if setpart[0] is not None: # if a part
+                if setpart[1] is not None: # if a part
                     pquery = ("select * from parts where partID = %(partID)s")
                     globals.cursor.execute(pquery, {'partID': setpart[0]})
                     setpart = globals.cursor.fetchone()
                     total += setpart[2]
-                elif setpart[1] is not None: # if a set
+                elif setpart[2] is not None: # if a set
                     squery = ("select * from sets where setID = %(setID)s")
-                    globals.cursor.execute(squery, {'setID': setpart[1]})
-                    set = globals.cursor.fethcone()
-                    quantity = set[2]
+                    globals.cursor.execute(squery, {'setID': setpart[2]})
+                    set = globals.cursor.fetchone()
+                    quantity = setpart[2]
                     spquery = ("select * from setparts where setID = %(setID)s")
-                    globals.cursor.execute(spquery, {'setID': setpart[1]})
+                    globals.cursor.execute(spquery, {'setID': setpart[2]})
                     setparts = globals.cursor.fetchall()
                     for setpart in setparts: # for each part in set
                         pquery = ("select * from parts where partID = %(partID)s") # find the part
-                        globals.cursor.execute(pquery, {'partID': setpart[0]})
+                        globals.cursor.execute(pquery, {'partID': setpart[1]})
                         part = globals.cursor.fetchone()
                         total += part[2] * setpart[2] # and add its price
                         print("set {} has {} of part {} worth {} apiece".format(setpart[1], quantity, part[0], part[2]))
@@ -90,7 +90,7 @@ class OnlineMenu:
             print("Whoops! You don't appear to have an order.\nAdd some items to your cart to begin a new order.")
         else:            
             orderNum = recentOrder[0]
-            print("Order number {} total price {}".format(orderNum, self.getPriceOfRecentOrder()))
+            print("Order number {} total price ${:.2f}".format(orderNum, self.getPriceOfRecentOrder()))
             query = ("select * from orderitemset where orderNum = %(orderNum)s")
             globals.cursor.execute(query, {'orderNum': orderNum})
             items = globals.cursor.fetchall()

@@ -101,4 +101,4 @@ CREATE TABLE IF NOT EXISTS orderitemset (
 );
 
 insert into orderitemset(orderNum, partID) values(1, 1); /* First part */
-insert into orderitemset(orderNum, setID) values(1, 2); /* First set */
+insert into orderitemset(orderNum, setID) values(1, 1); /* First set */
